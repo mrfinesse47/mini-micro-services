@@ -25,6 +25,7 @@ const posts = {};
 app.use(cors());
 
 app.get('/posts', (req, res) => {
+  console.log(posts);
   res.send(posts);
 });
 
@@ -41,8 +42,13 @@ app.post('/events', (req, res) => {
     post.comments.push({ id, content, status });
   }
   if (type === 'CommentUpdated') {
-    console.log('comment updated');
-    console.log(data);
+    const { id, content, postId, status } = data;
+    const post = posts[postId];
+    const comment = post.comments.find((comment) => comment.id === id);
+    comment.status = status;
+    comment.content = content;
+    comment.postId = postId;
+    comment.id = id;
   }
 
   res.status(201).send({ message: 'success' });

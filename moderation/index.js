@@ -10,7 +10,6 @@ app.post('/events', async (req, res) => {
 
   if (type === 'CommentCreated') {
     const status = data.content.includes('orange') ? 'rejected' : 'approved';
-
     try {
       await axios.post('http://localhost:4005/events', {
         type: 'CommentModerated',
@@ -22,7 +21,7 @@ app.post('/events', async (req, res) => {
         },
       });
     } catch (e) {
-      console.log(e);
+      console.log('failed on type:', type);
     }
   }
   res.send({ message: 'moderation successful' });
