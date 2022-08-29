@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-depl
+  name: moderation-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: posts
+      app: moderation
   template:
     metadata:
       labels:
-        app: posts
+        app: moderation
     spec:
       containers:
-        - name: posts
-          image: mrfinesse47/posts
+        - name: moderation
+          image: mrfinesse47/moderation
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-cluster-ip-srv
+  name: moderation-srv
 spec:
   selector:
-    app: posts
+    app: moderation
   # type: ClusterIP --optional kubernetes will make this automatic
   ports:
-    - name: posts
+    - name: moderation
       protocol: TCP
-      port: 4000
-      targetPort: 4000
+      port: 4003
+      targetPort: 4003

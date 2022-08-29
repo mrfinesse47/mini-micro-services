@@ -1,3 +1,5 @@
+# the node port allows access from the outside
+
 apiVersion: v1
 kind: Service
 metadata:
